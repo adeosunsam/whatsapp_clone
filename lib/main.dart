@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:whatsapp_clone/components/colors.dart';
+import 'package:whatsapp_clone/screen/home/home_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        scaffoldBackgroundColor: ColorConstant.tealGreenDark,
+        scaffoldBackgroundColor: ColorConstant.backGround,
         primarySwatch: Colors.blue,
         textTheme: const TextTheme(
           bodyText2: TextStyle(
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      //home: const MyHomePage(),
+      home: const MyHomeScreen(),
     );
   }
 }
