@@ -9,4 +9,5 @@ class ColorConstant {
   static const lightPurple = Color(0XFFece5dd);
   static const backGround = Color(0XFF111E25);
   static const header = Color(0XFF232D35);
+  static const headerColor = Color.fromARGB(255, 170, 170, 170);
 }

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:whatsapp_clone/components/colors.dart';
+import 'package:whatsapp_clone/components/enum/menu_action.dart';
+import 'package:whatsapp_clone/screen/home/components/home_option_navigator.dart';
 
 class MyHomeScreen extends StatefulWidget {
   const MyHomeScreen({Key? key}) : super(key: key);
@@ -9,18 +12,42 @@ class MyHomeScreen extends StatefulWidget {
 }
 
 class _MyHomeScreenState extends State<MyHomeScreen> {
+  final PageController _pageController = PageController();
   ScrollController homeScrollController = ScrollController();
+  int currentIndex = 0;
+
+  callback(index) {
+    setState(() {
+      currentIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Scaffold(
-      body: Column(
-        children: [
-          SafeArea(
-            child: Container(
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: const SystemUiOverlayStyle(
+        statusBarColor: ColorConstant.header,
+        statusBarIconBrightness: Brightness.light, // For Android (dark icons)
+        // statusBarBrightness: Brightness.light, // For iOS (dark icons)
+      ),
+      child: Scaffold(
+        body: Column(
+          children: [
+            Container(
+              decoration: const BoxDecoration(
+                color: ColorConstant.header,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black54,
+                    blurRadius: 2.0,
+                    spreadRadius: 0.0,
+                    offset: Offset(2.0, 2.0), // shadow direction: bottom right
+                  )
+                ],
+              ),
               width: double.infinity,
-              height: size.height * .15,
-              color: ColorConstant.header,
+              height: size.height * .2,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -33,9 +60,9 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                           "WhatsApp Business",
                           style: TextStyle(
                             fontFamily: "Helvetica",
-                            fontSize: 23,
+                            fontSize: 20,
                             fontWeight: FontWeight.w600,
-                            color: Color.fromARGB(255, 215, 215, 215),
+                            color: ColorConstant.headerColor,
                           ),
                         ),
                         Row(
@@ -43,14 +70,14 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                             const Icon(
                               Icons.search,
                               color: Color.fromARGB(255, 215, 215, 215),
-                              size: 27,
+                              size: 25,
                             ),
                             const SizedBox(width: 10),
                             PopupMenuButton<MenuAction>(
                               icon: const Icon(
                                 Icons.more_vert,
-                                color: Color.fromARGB(255, 215, 215, 215),
-                                size: 27,
+                                color: ColorConstant.headerColor,
+                                size: 25,
                               ),
                               onSelected: (value) async {
                                 switch (value) {
@@ -65,8 +92,7 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                                     child: Text(
                                       'Log out',
                                       style: TextStyle(
-                                        color:
-                                            Color.fromARGB(255, 215, 215, 215),
+                                        color: ColorConstant.headerColor,
                                       ),
                                     ),
                                   ),
@@ -79,67 +105,59 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 20),
-                  Row(
-                    children: [
-                      SizedBox(
-                        width: size.width * .1,
-                        child: const Align(
-                          alignment: Alignment.centerRight,
-                          child: Icon(
-                            Icons.photo_camera_rounded,
-                            color: Color.fromARGB(255, 215, 215, 215),
-                            size: 25,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: size.width * .9,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: const [
-                            Text(
-                              "CHATS",
-                              style: TextStyle(
-                                fontFamily: "Helvetica",
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                                color: Color.fromARGB(255, 215, 215, 215),
-                              ),
-                            ),
-                            Text(
-                              "STATUS",
-                              style: TextStyle(
-                                fontFamily: "Helvetica",
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                                color: Color.fromARGB(255, 215, 215, 215),
-                              ),
-                            ),
-                            Text(
-                              "CALLS",
-                              style: TextStyle(
-                                fontFamily: "Helvetica",
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                                color: Color.fromARGB(255, 215, 215, 215),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
+                  //const SizedBox(height: 5),
+                  HomeOptionNavigator(
+                    selectedIndex: currentIndex,
+                    callbackFunction: callback,
+                    pageController: _pageController,
                   ),
                 ],
               ),
             ),
-          ),
-        ],
+            SizedBox(
+              height: size.height * .8,
+              child: PageView(
+                controller: _pageController,
+                onPageChanged: (page) {
+                  setState(() {
+                    currentIndex = page;
+                  });
+                },
+                children: [
+                  SingleChildScrollView(
+                    controller: homeScrollController,
+                    child: Column(
+                      children: const [
+                        Text("Allos 1"),
+                        SizedBox(height: 100),
+                        Text("Allos 1"),
+                        SizedBox(height: 100),
+                        Text("Allos 1"),
+                        SizedBox(height: 100),
+                        Text("Allos 1"),
+                        SizedBox(height: 100),
+                        Text("Allos 1"),
+                        SizedBox(height: 100),
+                        Text("Allos 1"),
+                        SizedBox(height: 100),
+                        Text("Allos 1"),
+                        SizedBox(height: 100),
+                        Text("Allos 1"),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    child: const Text("Allos 2"),
+                  ),
+                  Container(
+                    child: const Text("Allos 3"),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
-}
-
-enum MenuAction {
-  logout,
 }
