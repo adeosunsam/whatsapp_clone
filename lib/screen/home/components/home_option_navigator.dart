@@ -110,7 +110,7 @@ class _HomeOptionNavigatorState extends State<HomeOptionNavigator> {
                     decoration: BoxDecoration(
                       border: Border.all(
                         color: ColorConstant.tealGreen,
-                        width: 1.7,
+                        width: 1.4,
                       ),
                     ),
                   )
@@ -119,7 +119,7 @@ class _HomeOptionNavigatorState extends State<HomeOptionNavigator> {
                     decoration: BoxDecoration(
                       border: Border.all(
                         color: Colors.transparent,
-                        width: 1.7,
+                        width: 1.4,
                       ),
                     ),
                   ),

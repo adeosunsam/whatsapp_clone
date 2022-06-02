@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:whatsapp_clone/components/colors.dart';
 import 'package:whatsapp_clone/components/enum/menu_action.dart';
+import 'package:whatsapp_clone/screen/home/components/chat_screen.dart';
 import 'package:whatsapp_clone/screen/home/components/home_option_navigator.dart';
 
 class MyHomeScreen extends StatefulWidget {
@@ -124,28 +125,7 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                   });
                 },
                 children: [
-                  SingleChildScrollView(
-                    controller: homeScrollController,
-                    child: Column(
-                      children: const [
-                        Text("Allos 1"),
-                        SizedBox(height: 100),
-                        Text("Allos 1"),
-                        SizedBox(height: 100),
-                        Text("Allos 1"),
-                        SizedBox(height: 100),
-                        Text("Allos 1"),
-                        SizedBox(height: 100),
-                        Text("Allos 1"),
-                        SizedBox(height: 100),
-                        Text("Allos 1"),
-                        SizedBox(height: 100),
-                        Text("Allos 1"),
-                        SizedBox(height: 100),
-                        Text("Allos 1"),
-                      ],
-                    ),
-                  ),
+                  const ChatScreen(),
                   Container(
                     child: const Text("Allos 2"),
                   ),
